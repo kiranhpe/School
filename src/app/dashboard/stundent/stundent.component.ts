@@ -13,7 +13,9 @@ export class StundentComponent implements OnInit {
   constructor(private _student: StudentService) { }
 
   ngOnInit(): void {
-    this.students = this._student.GetStudents();
+   this._student.GetStudents().subscribe((data: Student[]) => {
+     this.students = data;
+   });
   }
 
 }

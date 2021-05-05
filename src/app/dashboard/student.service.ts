@@ -1,25 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Student } from './models/student.model';
 
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
 
-  constructor() { }
+  constructor(private _http: HttpClient) { }
 
-  GetStudents():Student[]{
-    let students: Student[] = [
-      {
-        id:1,
-        name:'Kiran'
-      },
-      {
-        id:2,
-        name: 'Chethan'
-      }
-    ];
+  GetStudents():Observable<Student[]>{
 
-    return students;
+    return this._http.get<Student[]>('https://jsonplaceholder.typicode.com/users');
   }
 }
